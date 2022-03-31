@@ -12,6 +12,7 @@
 #include <Slice/Preprocessor.h>
 #include <Slice/CPlusPlusUtil.h>
 #include <IceUtil/OutputUtil.h>
+#include <cstring>
 
 using namespace std;
 using namespace IceUtil;

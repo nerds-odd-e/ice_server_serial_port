@@ -16,6 +16,7 @@
 #include <Ice/ReferenceF.h>
 #include <Ice/BasicStream.h>
 #include <Ice/Current.h>
+#include <memory>
 
 namespace Ice
 {

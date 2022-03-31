@@ -9,6 +9,7 @@
 
 #include <IceUtil/MD5.h>
 #include <IceUtil/MD5I.h>
+#include <cstring>
 
 using namespace std;
 

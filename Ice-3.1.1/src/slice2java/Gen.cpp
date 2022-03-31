@@ -15,6 +15,7 @@
 #include <IceUtil/Iterator.h>
 
 #include <limits>
+#include <cstring>
 
 using namespace std;
 using namespace Slice;

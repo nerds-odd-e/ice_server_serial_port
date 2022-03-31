@@ -10,6 +10,7 @@
 #include <IceUtil/DisableWarnings.h>
 #include <IceUtil/Functional.h>
 #include <Gen.h>
+#include <cstring>
 
 #ifdef __BCPLUSPLUS__
 #  include <iterator>

@@ -10,6 +10,7 @@
 #include <IceUtil/Functional.h>
 #include <Slice/Parser.h>
 #include <Slice/GrammarUtil.h>
+#include <cstring>
 #ifdef __BCPLUSPLUS__
 #  include <iterator>
 #endif

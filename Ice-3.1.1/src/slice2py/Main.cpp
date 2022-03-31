@@ -16,6 +16,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <cstring>
 
 #ifdef _WIN32
 #include <direct.h>

@@ -10,6 +10,8 @@
 #include <Slice/PythonUtil.h>
 #include <Slice/Checksum.h>
 #include <IceUtil/Functional.h>
+#include <climits>
+
 #ifdef __BCPLUSPLUS__
 #  include <iterator>
 #endif

@@ -9,6 +9,7 @@
 
 #include <IceUtil/Random.h>
 #include <IceUtil/StaticMutex.h>
+#include <cstring>
 
 #ifdef _WIN32
 #   include <Wincrypt.h>

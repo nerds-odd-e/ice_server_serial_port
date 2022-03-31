@@ -26,6 +26,7 @@
 #include <Ice/TraceLevelsF.h>
 #include <Ice/OutgoingAsyncF.h>
 #include <Ice/EventHandler.h>
+#include <memory>
 
 namespace IceInternal
 {
