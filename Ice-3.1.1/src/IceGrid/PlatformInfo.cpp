@@ -18,6 +18,8 @@
 
 #include <IcePatch2/Util.h>
 
+#define PATH_MAX 4096
+
 #if defined(_WIN32)
 #   include <direct.h> // For _getcwd
 #   include <pdhmsg.h> // For PDH_MORE_DATA

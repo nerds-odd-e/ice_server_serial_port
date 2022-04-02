@@ -15,6 +15,7 @@
 #include <FreezeScript/Util.h>
 #include <db_cxx.h>
 #include <set>
+#include <climits>
 
 using namespace std;
 

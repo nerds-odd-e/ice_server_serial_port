@@ -12,6 +12,7 @@
 
 #include <Ice/Proxy.h>
 #include <IceStorm/Event.h>
+#include <memory>
 
 namespace IceStorm
 {

@@ -11,6 +11,8 @@
 #include <OS.h>
 #include <IceUtil/Unicode.h>
 
+#define PATH_MAX 4096
+
 #ifdef __BCPLUSPLUS__
 #  include <dir.h>
 #  include <io.h>

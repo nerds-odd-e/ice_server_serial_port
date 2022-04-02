@@ -74,6 +74,7 @@ USE_READLINE		?= no
 # directory.
 #
 #DB_HOME		?= /opt/db
+DB_HOME = /usr/local/berkeleydb
 
 #
 # If expat is not installed in a standard location where the compiler
@@ -180,8 +181,10 @@ BZIP2_LIBS              = $(if $(BZIP2_HOME),-L$(BZIP2_HOME)/$(libsubdir)) -lbz2
 BZIP2_RPATH_LINK        = $(if $(BZIP2_HOME),$(call rpathlink,$(BZIP2_HOME)/$(libsubdir)))
 
 DB_FLAGS                = $(if $(DB_HOME),-I$(DB_HOME)/include)
-DB_LIBS                 = $(if $(DB_HOME),-L$(DB_HOME)/$(libsubdir)) -ldb_cxx
-DB_RPATH_LINK           = $(if $(DB_HOME),$(call rpathlink,$(DB_HOME)/$(libsubdir)))
+#DB_LIBS                 = $(if $(DB_HOME),-L$(DB_HOME)/$(libsubdir)) -ldb_cxx
+DB_LIBS                 = $(if $(DB_HOME),-L$(DB_HOME)/lib) -ldb_cxx
+#DB_RPATH_LINK           = $(if $(DB_HOME),$(call rpathlink,$(DB_HOME)/$(libsubdir)))
+DB_RPATH_LINK           = $(if $(DB_HOME),$(call rpathlink,$(DB_HOME)/lib))
 
 EXPAT_FLAGS             = $(if $(EXPAT_HOME),-I$(EXPAT_HOME)/include)
 EXPAT_LIBS              = $(if $(EXPAT_HOME),-L$(EXPAT_HOME)/$(libsubdir)) -lexpat

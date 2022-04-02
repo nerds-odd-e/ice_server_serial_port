@@ -22,6 +22,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#define PATH_MAX 4096
+
 #ifndef _WIN32
 #   include <sys/wait.h>
 #   include <signal.h>

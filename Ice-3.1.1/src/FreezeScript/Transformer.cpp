@@ -19,6 +19,7 @@
 #include <Freeze/Initialize.h>
 #include <IceXML/Parser.h>
 #include <db_cxx.h>
+#include <climits>
 
 using namespace std;
 
