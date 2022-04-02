@@ -28,9 +28,15 @@ ENV PATH="/usr/bin/cmake/bin:${PATH}"
 
 RUN yum -y install bzip2-devel.x86_64 expat-devel.x86_64 openssl-devel.x86_64
 
-ADD . /opt/ice_server
+ADD ./Ice-3.1.1 /opt/ice_server/Ice-3.1.1
 WORKDIR /opt/ice_server/Ice-3.1.1
 RUN make
+RUN make install
+ENV PATH="/opt/Ice-3.1/bin:${PATH}"
+ENV LD_LIBRARY_PATH="/opt/Ice-3.1/lib:${LD_LIBRARY_PATH}"
+
+WORKDIR /opt/ice_server
+RUN slice2cpp Server.ice
 
 WORKDIR /opt/ice_server/build
 RUN cmake ..
