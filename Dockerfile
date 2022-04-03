@@ -40,9 +40,14 @@ COPY ./src /opt/ice_server
 WORKDIR /opt/ice_server
 RUN slice2cpp Server.ice
 
+RUN yum -y install tcp_wrappers
+COPY ./socat-1.7.2.4-1.el6.rf.x86_64.rpm /opt/socat/socat.rpm
+RUN rpm -ivh /opt/socat/socat.rpm
+
 WORKDIR /opt/ice_server/build
 RUN cmake ..
 RUN make
 
-ENTRYPOINT ./ice_server_serial_port
-#ENTRYPOINT tail -f /dev/null
+COPY ./start.sh /opt/scripts/start.sh
+ENTRYPOINT /opt/scripts/start.sh
+
