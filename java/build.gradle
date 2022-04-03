@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.4")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE"
+    }
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public"
+    }
+}
+
+dependencies {
+    testImplementation("io.cucumber:cucumber-java:6.10.2")
+    testImplementation("io.cucumber:cucumber-spring:6.10.2")
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation("org.assertj:assertj-core:3.19.0")
+}
+
+configurations {
+    providedRuntime
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber(type: JavaExec) {
+    dependsOn assemble, testClasses
+    main = "io.cucumber.core.cli.Main"
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+    jvmArgs "-Dfile.encoding=UTF-8"
+    args = ['--plugin', 'pretty',
+            '--glue', 'com.odde.atddv2',
+            '--glue', 'com.github.leeonky',
+            'src/test/resources']
+}
