@@ -1,5 +1,7 @@
 package com.odde.atddv2.ice;
 
+import com.ice.server.SerialPortPrx;
+import com.ice.server.SerialPortPrxHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,6 +19,18 @@ public class IceSteps {
 
     @When("ice client send request")
     public void ice_client_send_request() {
+        try {
+            Ice.Communicator ic = Ice.Util.initialize();
+            Ice.ObjectPrx base = ic.stringToProxy("SerialPort:default -p 10000 -h localhost");
+            SerialPortPrx serialPort = SerialPortPrxHelper.checkedCast(base);
+            if (serialPort == null)
+                throw new Error("Invalid proxy");
+            String output = serialPort.readSerialPort();
+            System.out.println("output = " + output);
+            ic.destroy();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Then("ice client get server response {string}")

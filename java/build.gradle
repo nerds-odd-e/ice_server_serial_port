@@ -27,6 +27,7 @@ repositories {
 }
 
 dependencies {
+    testImplementation files('libs/Ice.jar')
     testImplementation("io.cucumber:cucumber-java:6.10.2")
     testImplementation("io.cucumber:cucumber-spring:6.10.2")
     testImplementation('org.springframework.boot:spring-boot-starter-test')
@@ -47,6 +48,5 @@ task cucumber(type: JavaExec) {
     jvmArgs "-Dfile.encoding=UTF-8"
     args = ['--plugin', 'pretty',
             '--glue', 'com.odde.atddv2',
-            '--glue', 'com.github.leeonky',
             'src/test/resources']
 }
