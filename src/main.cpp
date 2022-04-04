@@ -3,6 +3,11 @@
 #include <Server.h>
 #include <string>
 
+#include <fcntl.h> // Contains file controls like O_RDWR
+#include <errno.h> // Error integer and strerror() function
+#include <termios.h> // Contains POSIX terminal control definitions
+#include <unistd.h> // write(), read(), close()
+
 using namespace std;
 using namespace Server;
 
@@ -14,7 +19,21 @@ public:
 
 ::std::string SerialPortI::readSerialPort(const ::Ice::Current&)
 {
-    return "Hello world!";
+    int serial_port = open("/dev/pts/1", O_RDONLY | O_NOCTTY);
+
+    if (serial_port < 0) {
+        printf("Error %i from open: %s\n", errno, strerror(errno));
+    }
+
+    char read_buf [2048];
+
+    int n = read(serial_port, &read_buf, sizeof(read_buf));
+
+    if (n > 0) {
+        return string(read_buf);
+    } else {
+        return "No data";
+    }
 }
 
 int main(int argc, char* argv[]) {

@@ -36,13 +36,13 @@ RUN make install
 ENV PATH="/opt/Ice-3.1/bin:${PATH}"
 ENV LD_LIBRARY_PATH="/opt/Ice-3.1/lib64:${LD_LIBRARY_PATH}"
 
+COPY ./socat-1.7.2.4-1.el6.rf.x86_64.rpm /opt/socat/socat.rpm
+RUN yum -y install tcp_wrappers
+RUN rpm -ivh /opt/socat/socat.rpm
+
 COPY ./src /opt/ice_server
 WORKDIR /opt/ice_server
 RUN slice2cpp Server.ice
-
-RUN yum -y install tcp_wrappers
-COPY ./socat-1.7.2.4-1.el6.rf.x86_64.rpm /opt/socat/socat.rpm
-RUN rpm -ivh /opt/socat/socat.rpm
 
 WORKDIR /opt/ice_server/build
 RUN cmake ..
