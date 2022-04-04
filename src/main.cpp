@@ -19,7 +19,7 @@ public:
 
 ::std::string SerialPortI::readSerialPort(const ::Ice::Current&)
 {
-    int serial_port = open("/dev/pts/1", O_RDONLY | O_NOCTTY);
+    int serial_port = open("/dev/pts/0", O_RDONLY | O_NOCTTY);
 
     if (serial_port < 0) {
         printf("Error %i from open: %s\n", errno, strerror(errno));
