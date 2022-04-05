@@ -15,6 +15,7 @@ class SerialPortI : public SerialPort
 {
 public:
     virtual ::std::string readSerialPort(const ::Ice::Current& = ::Ice::Current());
+    virtual void writeSerialPort(const ::std::string&, const ::Ice::Current& = ::Ice::Current());
 };
 
 ::std::string SerialPortI::readSerialPort(const ::Ice::Current&)
@@ -35,6 +36,20 @@ public:
     } else {
         return "No data";
     }
+}
+
+void SerialPortI::writeSerialPort(const ::std::string& message, const ::Ice::Current&) {
+    int serial_port = open("/dev/pts/0", O_WRONLY | O_NOCTTY);
+
+    if (serial_port < 0) {
+        printf("Error %i from open: %s\n", errno, strerror(errno));
+    }
+
+    int n = write(serial_port, message.c_str(), message.length() + 1);
+
+    printf("Wrote %i bytes to serial port\n", n);
+
+    close(serial_port);
 }
 
 int main(int argc, char* argv[]) {

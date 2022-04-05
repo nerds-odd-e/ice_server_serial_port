@@ -15,4 +15,8 @@ public interface SerialPortPrx extends Ice.ObjectPrx {
     public String readSerialPort();
 
     public String readSerialPort(java.util.Map __ctx);
+
+    public void writeSerialPort(String message);
+
+    public void writeSerialPort(String message, java.util.Map __ctx);
 }

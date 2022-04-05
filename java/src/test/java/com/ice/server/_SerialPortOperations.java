@@ -13,4 +13,6 @@ package com.ice.server;
 
 public interface _SerialPortOperations {
     String readSerialPort(Ice.Current __current);
+
+    void writeSerialPort(String message, Ice.Current __current);
 }

@@ -14,4 +14,7 @@ package com.ice.server;
 public interface _SerialPortDel extends Ice._ObjectDel {
     String readSerialPort(java.util.Map __ctx)
             throws IceInternal.LocalExceptionWrapper;
+
+    void writeSerialPort(String message, java.util.Map __ctx)
+            throws IceInternal.LocalExceptionWrapper;
 }
