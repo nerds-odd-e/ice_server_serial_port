@@ -25,10 +25,11 @@ public:
         printf("Error %i from open: %s\n", errno, strerror(errno));
     }
 
-    char read_buf [2048];
+    char read_buf [2048] = {};
 
     int n = read(serial_port, &read_buf, sizeof(read_buf));
 
+    close(serial_port);
     if (n > 0) {
         return string(read_buf);
     } else {
