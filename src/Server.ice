@@ -5,4 +5,10 @@ module Server
         string readSerialPort();
         void writeSerialPort(string message);
     };
+
+    interface Driver
+    {
+        string readSerialPort();
+        void writeSerialPort(string message);
+    };
 };

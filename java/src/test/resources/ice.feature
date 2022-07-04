@@ -9,3 +9,9 @@ Feature: Ice server serial port
     Given connect to serial port
     When ice client send write request "ice request"
     Then serial port write "ice request"
+
+  Scenario: replace driver on device
+    Given device info "x-device"
+    When ice get device info
+    Then device info is "x-device"
+

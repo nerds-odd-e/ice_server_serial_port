@@ -1,11 +1,16 @@
 package com.odde.atddv2.ice;
 
+import com.ice.server.DriverPrx;
+import com.ice.server.DriverPrxHelper;
 import com.ice.server.SerialPortPrx;
 import com.ice.server.SerialPortPrxHelper;
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
+import org.mockserver.integration.ClientAndServer;
+import org.mockserver.model.HttpResponse;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -13,8 +18,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockserver.integration.ClientAndServer.startClientAndServer;
+import static org.mockserver.model.HttpRequest.request;
 
 @ContextConfiguration(classes = {CucumberConfiguration.class}, loader = SpringBootContextLoader.class)
 @CucumberContextConfiguration
@@ -23,6 +31,8 @@ public class IceSteps {
     private String output;
     private Socket clientSocket;
     private BufferedReader in;
+    private ClientAndServer mockServer;
+    private String deviceInfo;
 
     @Given("ice server with serial port data {string}")
     public void ice_server_with_serial_port_data(String response) throws IOException, InterruptedException {
@@ -73,5 +83,39 @@ public class IceSteps {
     @Then("serial port write {string}")
     public void serialPortWrite(String expected) throws IOException {
         assertThat(in.readLine()).isEqualTo(expected);
+    }
+
+    @Given("device info {string}")
+    public void device_info(String string) throws InterruptedException {
+        mockServer = startClientAndServer(1080);
+        mockServer.when(request().withMethod("GET").withPath("/device-info")).respond(HttpResponse.response()
+                .withStatusCode(200)
+                .withBody(string, StandardCharsets.UTF_8));
+    }
+
+    @When("ice get device info")
+    public void ice_get_device_info() {
+        try {
+            Ice.Communicator ic = Ice.Util.initialize();
+            Ice.ObjectPrx base = ic.stringToProxy("Driver:default -p 10000 -h localhost");
+            DriverPrx driver = DriverPrxHelper.checkedCast(base);
+            if (driver == null)
+                throw new Error("Invalid proxy");
+            deviceInfo = driver.readSerialPort();
+            ic.destroy();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Then("device info is {string}")
+    public void device_info_is(String string) {
+        assertThat(deviceInfo).isEqualTo(string);
+    }
+
+    @After
+    public void resetMockServer() {
+        if (mockServer != null)
+            mockServer.reset();
     }
 }

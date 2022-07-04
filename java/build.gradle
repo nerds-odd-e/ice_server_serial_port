@@ -32,6 +32,8 @@ dependencies {
     testImplementation("io.cucumber:cucumber-spring:6.10.2")
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation("org.assertj:assertj-core:3.19.0")
+    testImplementation("org.mock-server:mockserver-netty:5.13.2")
+    testImplementation("org.mock-server:mockserver-client-java:5.13.2")
 }
 
 configurations {
