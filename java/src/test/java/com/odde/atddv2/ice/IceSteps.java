@@ -101,7 +101,7 @@ public class IceSteps {
             DriverPrx driver = DriverPrxHelper.checkedCast(base);
             if (driver == null)
                 throw new Error("Invalid proxy");
-            deviceInfo = driver.readSerialPort();
+            deviceInfo = driver.readInfoFromDevice();
             ic.destroy();
         } catch (Exception e) {
             e.printStackTrace();

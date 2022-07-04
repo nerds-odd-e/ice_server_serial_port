@@ -12,7 +12,5 @@
 package com.ice.server;
 
 public interface _DriverOperations {
-    String readSerialPort(Ice.Current __current);
-
-    void writeSerialPort(String message, Ice.Current __current);
+    String readInfoFromDevice(Ice.Current __current);
 }

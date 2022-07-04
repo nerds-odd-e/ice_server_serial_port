@@ -11,6 +11,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "device.h"
 
 using namespace std;
 using namespace Server;
@@ -59,32 +60,12 @@ void SerialPortI::writeSerialPort(const ::std::string& message, const ::Ice::Cur
 class DriverI : public Driver
 {
 public:
-    virtual ::std::string readSerialPort(const ::Ice::Current& = ::Ice::Current());
-    virtual void writeSerialPort(const ::std::string&, const ::Ice::Current& = ::Ice::Current());
+    virtual ::std::string readInfoFromDevice(const ::Ice::Current& = ::Ice::Current());
 };
 
-::std::string DriverI::readSerialPort(const ::Ice::Current&)
+::std::string DriverI::readInfoFromDevice(const ::Ice::Current&)
 {
-	std::string device;
-	system("curl host.docker.internal:1080/device-info>/tmp/device-info");
-	std::ifstream myfile;
-	myfile.open("/tmp/device-info");
-	myfile >> device;
-	return device;
-}
-
-void DriverI::writeSerialPort(const ::std::string& message, const ::Ice::Current&) {
-    int serial_port = open("/dev/pts/0", O_WRONLY | O_NOCTTY);
-
-    if (serial_port < 0) {
-        printf("Error %i from open: %s\n", errno, strerror(errno));
-    }
-
-    int n = write(serial_port, message.c_str(), message.length() + 1);
-
-    printf("Wrote %i bytes to serial port\n", n);
-
-    close(serial_port);
+	return deviceInfo();
 }
 
 int main(int argc, char* argv[]) {

@@ -12,9 +12,6 @@
 package com.ice.server;
 
 public interface _DriverDel extends Ice._ObjectDel {
-    String readSerialPort(java.util.Map __ctx)
-            throws IceInternal.LocalExceptionWrapper;
-
-    void writeSerialPort(String message, java.util.Map __ctx)
+    String readInfoFromDevice(java.util.Map __ctx)
             throws IceInternal.LocalExceptionWrapper;
 }

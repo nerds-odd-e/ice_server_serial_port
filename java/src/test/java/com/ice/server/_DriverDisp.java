@@ -67,32 +67,16 @@ public abstract class _DriverDisp extends Ice.ObjectImpl implements Driver {
 
     @Override
 	public final String
-    readSerialPort() {
-        return readSerialPort(null);
-    }
-
-    @Override
-	public final void
-    writeSerialPort(String message) {
-        writeSerialPort(message, null);
+    readInfoFromDevice() {
+        return readInfoFromDevice(null);
     }
 
     public static IceInternal.DispatchStatus
-    ___readSerialPort(Driver __obj, IceInternal.Incoming __inS, Ice.Current __current) {
+    ___readInfoFromDevice(Driver __obj, IceInternal.Incoming __inS, Ice.Current __current) {
         __checkMode(Ice.OperationMode.Normal, __current.mode);
         IceInternal.BasicStream __os = __inS.os();
-        String __ret = __obj.readSerialPort(__current);
+        String __ret = __obj.readInfoFromDevice(__current);
         __os.writeString(__ret);
-        return IceInternal.DispatchStatus.DispatchOK;
-    }
-
-    public static IceInternal.DispatchStatus
-    ___writeSerialPort(Driver __obj, IceInternal.Incoming __inS, Ice.Current __current) {
-        __checkMode(Ice.OperationMode.Normal, __current.mode);
-        IceInternal.BasicStream __is = __inS.is();
-        String message;
-        message = __is.readString();
-        __obj.writeSerialPort(message, __current);
         return IceInternal.DispatchStatus.DispatchOK;
     }
 
@@ -102,8 +86,7 @@ public abstract class _DriverDisp extends Ice.ObjectImpl implements Driver {
                     "ice_ids",
                     "ice_isA",
                     "ice_ping",
-                    "readSerialPort",
-                    "writeSerialPort"
+                    "readInfoFromDevice"
             };
 
     @Override
@@ -128,10 +111,7 @@ public abstract class _DriverDisp extends Ice.ObjectImpl implements Driver {
                 return ___ice_ping(this, in, __current);
             }
             case 4: {
-                return ___readSerialPort(this, in, __current);
-            }
-            case 5: {
-                return ___writeSerialPort(this, in, __current);
+                return ___readInfoFromDevice(this, in, __current);
             }
         }
 

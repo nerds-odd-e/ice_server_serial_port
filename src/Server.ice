@@ -8,7 +8,6 @@ module Server
 
     interface Driver
     {
-        string readSerialPort();
-        void writeSerialPort(string message);
+        string readInfoFromDevice();
     };
 };

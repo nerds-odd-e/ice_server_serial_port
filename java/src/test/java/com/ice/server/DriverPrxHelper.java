@@ -14,44 +14,20 @@ package com.ice.server;
 public final class DriverPrxHelper extends Ice.ObjectPrxHelperBase implements DriverPrx {
     @Override
 	public String
-    readSerialPort() {
-        return readSerialPort(__defaultContext());
+    readInfoFromDevice() {
+        return readInfoFromDevice(__defaultContext());
     }
 
     @Override
 	public String
-    readSerialPort(java.util.Map __ctx) {
+    readInfoFromDevice(java.util.Map __ctx) {
         int __cnt = 0;
         while (true) {
             try {
-                __checkTwowayOnly("readSerialPort");
+                __checkTwowayOnly("readInfoFromDevice");
                 Ice._ObjectDel __delBase = __getDelegate();
                 _DriverDel __del = (_DriverDel) __delBase;
-                return __del.readSerialPort(__ctx);
-            } catch (IceInternal.LocalExceptionWrapper __ex) {
-                __handleExceptionWrapper(__ex);
-            } catch (Ice.LocalException __ex) {
-                __cnt = __handleException(__ex, __cnt);
-            }
-        }
-    }
-
-    @Override
-	public void
-    writeSerialPort(String message) {
-        writeSerialPort(message, __defaultContext());
-    }
-
-    @Override
-	public void
-    writeSerialPort(String message, java.util.Map __ctx) {
-        int __cnt = 0;
-        while (true) {
-            try {
-                Ice._ObjectDel __delBase = __getDelegate();
-                _DriverDel __del = (_DriverDel) __delBase;
-                __del.writeSerialPort(message, __ctx);
-                return;
+                return __del.readInfoFromDevice(__ctx);
             } catch (IceInternal.LocalExceptionWrapper __ex) {
                 __handleExceptionWrapper(__ex);
             } catch (Ice.LocalException __ex) {

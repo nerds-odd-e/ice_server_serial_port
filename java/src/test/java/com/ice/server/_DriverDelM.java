@@ -14,9 +14,9 @@ package com.ice.server;
 public final class _DriverDelM extends Ice._ObjectDelM implements _DriverDel {
     @Override
 	public String
-    readSerialPort(java.util.Map __ctx)
+    readInfoFromDevice(java.util.Map __ctx)
             throws IceInternal.LocalExceptionWrapper {
-        IceInternal.Outgoing __og = __connection.getOutgoing(__reference, "readSerialPort", Ice.OperationMode.Normal, __ctx, __compress);
+        IceInternal.Outgoing __og = __connection.getOutgoing(__reference, "readInfoFromDevice", Ice.OperationMode.Normal, __ctx, __compress);
         try {
             boolean __ok = __og.invoke();
             try {
@@ -31,36 +31,6 @@ public final class _DriverDelM extends Ice._ObjectDelM implements _DriverDel {
                 String __ret;
                 __ret = __is.readString();
                 return __ret;
-            } catch (Ice.LocalException __ex) {
-                throw new IceInternal.LocalExceptionWrapper(__ex, false);
-            }
-        } finally {
-            __connection.reclaimOutgoing(__og);
-        }
-    }
-
-    @Override
-	public void
-    writeSerialPort(String message, java.util.Map __ctx)
-            throws IceInternal.LocalExceptionWrapper {
-        IceInternal.Outgoing __og = __connection.getOutgoing(__reference, "writeSerialPort", Ice.OperationMode.Normal, __ctx, __compress);
-        try {
-            try {
-                IceInternal.BasicStream __os = __og.os();
-                __os.writeString(message);
-            } catch (Ice.LocalException __ex) {
-                __og.abort(__ex);
-            }
-            boolean __ok = __og.invoke();
-            try {
-                IceInternal.BasicStream __is = __og.is();
-                if (!__ok) {
-                    try {
-                        __is.throwException();
-                    } catch (Ice.UserException __ex) {
-                        throw new Ice.UnknownUserException(__ex.ice_name());
-                    }
-                }
             } catch (Ice.LocalException __ex) {
                 throw new IceInternal.LocalExceptionWrapper(__ex, false);
             }
